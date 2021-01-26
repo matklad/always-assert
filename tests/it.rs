@@ -5,49 +5,37 @@ mod armed {
     #[test]
     #[should_panic = "assertion failed: 2 + 2 == 5"]
     fn syntax1() {
-        if always!(2 + 2 == 5) {
-            loop {}
-        }
+        always!(2 + 2 == 5);
     }
 
     #[test]
     #[should_panic = "custom"]
     fn syntax2() {
-        if always!(2 + 2 == 5, "custom") {
-            loop {}
-        }
+        always!(2 + 2 == 5, "custom");
     }
 
     #[test]
     #[should_panic = "custom 92"]
     fn syntax3() {
-        if always!(2 + 2 == 5, "custom {}", 92) {
-            loop {}
-        }
+        always!(2 + 2 == 5, "custom {}", 92);
     }
 
     #[test]
     #[should_panic = "assertion failed: !(2 + 2 == 4)"]
     fn syntax4() {
-        if never!(2 + 2 == 4) {
-            loop {}
-        }
+        never!(2 + 2 == 4);
     }
 
     #[test]
     #[should_panic = "custom"]
     fn syntax5() {
-        if never!(2 + 2 == 4, "custom") {
-            loop {}
-        }
+        never!(2 + 2 == 4, "custom");
     }
 
     #[test]
     #[should_panic = "custom 92"]
     fn syntax6() {
-        if never!(2 + 2 == 4, "custom {}", 92) {
-            loop {}
-        }
+        never!(2 + 2 == 4, "custom {}", 92);
     }
 }
 

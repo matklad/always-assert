@@ -65,7 +65,7 @@ macro_rules! always {
             $crate::__log_error!($fmt $($arg)*);
         }
         cond
-    }}
+    }};
 }
 
 /// Asserts that the condition is never true and returns its actual value.
@@ -80,13 +80,15 @@ macro_rules! always {
 /// Accepts `format!` style arguments.
 #[macro_export]
 macro_rules! never {
-    ($cond:expr) => {
-        !$crate::always!(!$cond)
-    };
+    ($cond:expr) => {{
+        let cond = !$crate::always!(!$cond);
+        cond
+    }};
 
-    ($cond:expr, $fmt:literal $($arg:tt)*) => {
-        !$crate::always!(!$cond, $fmt $($arg)*)
-    }
+    ($cond:expr, $fmt:literal $($arg:tt)*) => {{
+        let cond = !$crate::always!(!$cond, $fmt $($arg)*);
+        cond
+    }};
 }
 
 #[cfg(feature = "log")]
