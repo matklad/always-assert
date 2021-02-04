@@ -78,8 +78,24 @@ macro_rules! always {
 /// * evaluates to true.
 ///
 /// Accepts `format!` style arguments.
+///
+/// Empty condition is equivalent to false:
+///
+/// ```ignore
+/// never!("oups") ~= unreachable!("oups")
+/// ```
 #[macro_export]
 macro_rules! never {
+    (true $($tt:tt)*) => { $crate::never!((true) $($tt)*) };
+    (false $($tt:tt)*) => { $crate::never!((false) $($tt)*) };
+    () => { $crate::never!("assertion failed: entered unreachable code") };
+    ($fmt:literal $(, $($arg:tt)*)?) => {{
+        if cfg!(debug_assertions) || $crate::__FORCE {
+            unreachable!($fmt $(, $($arg)*)?);
+        }
+        $crate::__log_error!($fmt $(, $($arg)*)?);
+    }};
+
     ($cond:expr) => {{
         let cond = !$crate::always!(!$cond);
         cond
