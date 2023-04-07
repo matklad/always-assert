@@ -1,6 +1,6 @@
 [package]
 name = "always-assert"
-version = "0.1.2"
+version = "0.1.3"
 description = "Recoverable assertions for long-running robust applications"
 keywords = ["assert"]
 categories = ["development-tools::debugging"]
