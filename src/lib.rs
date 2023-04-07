@@ -1,3 +1,4 @@
+#![no_std]
 //! Recoverable assertions, inspired by [the use of `assert()` in
 //! SQLite](https://www.sqlite.org/assert.html).
 //!
