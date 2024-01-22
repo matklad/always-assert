@@ -47,7 +47,7 @@
 ///
 /// If the condition is false:
 /// * panics if `force` feature or `debug_assertions` are enabled,
-/// * logs an error if `log` feature is enabled,
+/// * logs an error if the `tracing` feature is enabled,
 /// * evaluates to false.
 ///
 /// Accepts `format!` style arguments.
@@ -63,7 +63,7 @@ macro_rules! always {
             assert!(cond, $fmt $($arg)*);
         }
         if !cond {
-            $crate::__log_error!($fmt $($arg)*);
+            $crate::__tracing_error!($fmt $($arg)*);
         }
         cond
     }};
@@ -75,7 +75,7 @@ macro_rules! always {
 ///
 /// If the condition is true:
 /// * panics if `force` feature or `debug_assertions` are enabled,
-/// * logs an error if `log` feature is enabled,
+/// * logs an error if the `tracing` feature is enabled,
 /// * evaluates to true.
 ///
 /// Accepts `format!` style arguments.
@@ -94,7 +94,7 @@ macro_rules! never {
         if cfg!(debug_assertions) || $crate::__FORCE {
             unreachable!($fmt $(, $($arg)*)?);
         }
-        $crate::__log_error!($fmt $(, $($arg)*)?);
+        $crate::__tracing_error!($fmt $(, $($arg)*)?);
     }};
 
     ($cond:expr) => {{
@@ -108,14 +108,14 @@ macro_rules! never {
     }};
 }
 
-#[cfg(feature = "log")]
+#[cfg(feature = "tracing")]
 #[doc(hidden)]
-pub use log::error as __log_error;
+pub use tracing::error as __tracing_error;
 
-#[cfg(not(feature = "log"))]
+#[cfg(not(feature = "tracing"))]
 #[doc(hidden)]
 #[macro_export]
-macro_rules! __log_error {
+macro_rules! __tracing_error {
     ($($tt:tt)*) => {};
 }
 
