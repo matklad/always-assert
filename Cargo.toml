@@ -1,6 +1,6 @@
 [package]
 name = "always-assert"
-version = "0.1.3"
+version = "0.2.0"
 description = "Recoverable assertions for long-running robust applications"
 keywords = ["assert"]
 categories = ["development-tools::debugging"]
@@ -15,7 +15,7 @@ exclude = [".github/", "bors.toml", "rustfmt.toml"]
 members = ["xtask"]
 
 [dependencies]
-# Enable `log` feature to log assertion failures.
+# Enable `tracing` feature to log assertion failures.
 tracing = { version="0.1", optional=true }
 
 [features]
