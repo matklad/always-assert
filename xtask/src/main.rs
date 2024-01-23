@@ -24,10 +24,10 @@ fn try_main() -> Result<()> {
     {
         let _s = section("TEST");
         for &release in &[None, Some("--release")] {
-            for &log in &[&[][..], &["--features", "log"]] {
+            for &tracing in &[&[][..], &["--features", "tracing"]] {
                 for &force in &[&[][..], &["--features", "force"]] {
                     cmd!(
-                        "cargo test {release...} {log...} {force...}
+                        "cargo test {release...} {tracing...} {force...}
                              --workspace -- --nocapture"
                     )
                     .run()?;

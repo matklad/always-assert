@@ -16,7 +16,7 @@ members = ["xtask"]
 
 [dependencies]
 # Enable `log` feature to log assertion failures.
-log = { version="0.4", optional=true }
+tracing = { version="0.1", optional=true }
 
 [features]
 # Escalate assertion failure to panic even if `debug_assertions` are not set.
