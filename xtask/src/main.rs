@@ -1,6 +1,7 @@
 use std::env;
 
-use xaction::{Result, cargo_toml, cmd, git, section};
+use xaction::{Result, cargo_toml, git, section};
+use xshell::{Shell, cmd};
 
 fn main() {
     if let Err(err) = try_main() {
@@ -10,6 +11,7 @@ fn main() {
 }
 
 fn try_main() -> Result<()> {
+    let sh = Shell::new()?;
     let subcommand = std::env::args().nth(1);
     match subcommand {
         Some(it) if it == "ci" => (),
@@ -27,6 +29,7 @@ fn try_main() -> Result<()> {
             for &tracing in &[&[][..], &["--features", "tracing"]] {
                 for &force in &[&[][..], &["--features", "force"]] {
                     cmd!(
+                        sh,
                         "cargo test {release...} {tracing...} {force...} --workspace -- --nocapture"
                     )
                     .run()?;
