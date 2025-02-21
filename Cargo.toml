@@ -7,7 +7,7 @@ categories = ["development-tools::debugging"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/matklad/always-assert"
 authors = ["Aleksey Kladov <aleksey.kladov@gmail.com>"]
-edition = "2018"
+edition = "2024"
 
 exclude = [".github/", "bors.toml", "rustfmt.toml"]
 
@@ -16,7 +16,7 @@ members = ["xtask"]
 
 [dependencies]
 # Enable `tracing` feature to log assertion failures.
-tracing = { version="0.1", optional=true }
+tracing = { version = "0.1", optional = true }
 
 [features]
 # Escalate assertion failure to panic even if `debug_assertions` are not set.

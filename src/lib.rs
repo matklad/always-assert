@@ -31,7 +31,7 @@
 //! ```ignore
 //! use always_assert::never;
 //!
-//! let english_message = "super app installed!"
+//! let english_message = "super app installed!";
 //! let mut local_message = localize(english_message);
 //! if never!(local_message.is_empty(), "missing localization for {}", english_message) {
 //!     // We localized all the messages but this one slipper through the cracks?

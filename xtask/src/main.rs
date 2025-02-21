@@ -1,6 +1,6 @@
 use std::env;
 
-use xaction::{cargo_toml, cmd, git, section, Result};
+use xaction::{Result, cargo_toml, cmd, git, section};
 
 fn main() {
     if let Err(err) = try_main() {
@@ -27,8 +27,7 @@ fn try_main() -> Result<()> {
             for &tracing in &[&[][..], &["--features", "tracing"]] {
                 for &force in &[&[][..], &["--features", "force"]] {
                     cmd!(
-                        "cargo test {release...} {tracing...} {force...}
-                             --workspace -- --nocapture"
+                        "cargo test {release...} {tracing...} {force...} --workspace -- --nocapture"
                     )
                     .run()?;
                 }
