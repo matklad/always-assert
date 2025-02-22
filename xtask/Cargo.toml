@@ -6,5 +6,5 @@ authors = ["Aleksey Kladov <aleksey.kladov@gmail.com>"]
 edition = "2024"
 
 [dependencies]
-xaction = "0.2.4"
+anyhow = "1.0.96"
 xshell = "0.2.7"
