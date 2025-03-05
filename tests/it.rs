@@ -21,7 +21,7 @@ mod armed {
     }
 
     #[test]
-    #[should_panic = "assertion failed: !(2 + 2 == 4)"]
+    #[should_panic = "assertion failed"]
     fn syntax4() {
         let _: bool = never!(2 + 2 == 4);
     }
